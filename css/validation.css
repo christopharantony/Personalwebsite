@@ -1,0 +1,15 @@
+.errorMessage{
+    font-family: "poppins-bold", sans-serif;
+font-size: 1.1rem;
+line-height: 2.4rem;
+position: absolute;
+bottom: -1.2rem;
+right: .6rem;
+text-transform: uppercase;
+letter-spacing: .1rem;
+padding: 0 2rem;
+margin: 0;
+color: #FFFFFF;
+background: #FF0077;
+display: none;
+}
