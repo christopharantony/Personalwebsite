@@ -7,6 +7,7 @@ function validater(){
     var numValue = $("#contactNumber").val()
     var numRegex = /^(\+\d{1,3}[- ]?)?\d{10}$/
     var msgValue = $("#contactMessage").val()
+    var msgRegex = /^\w(\w(\.{1}|\s{1})?)+\w$/
 
     nameChecker()
     mailChecker()
@@ -49,6 +50,9 @@ function validater(){
         if(numValue==""){
             $("#contactNumber1").show()
             $("#contactNumber1").text("This field is required")
+        }else if(numValue.length!=10){
+            $("#contactNumber1").show()
+            $("#contactNumber1").text("Enter 10 digits")
         }else if(!numValue.match(numRegex)){
             $("#contactNumber1").show()
             $("#contactNumber1").text("Only Number are allowed")
@@ -59,13 +63,16 @@ function validater(){
     }
 
     function msgChecker(){
-        if (msgValue==""){
+        if (msgValue=="" || !msgValue.match(nameRegex)){
             $("#contactMessage1").show()
-            $("#contactMessage1").html("Please enter any message")
+            $("#contactMessage1").text("Please enter any message")
         }else if(msgValue.length<16){
             $("#contactMessage1").show()
-            $("#contactMessage1").html("Please enter atleast 15 characters")
+            $("#contactMessage1").text("Please enter atleast 15 characters")
 
+        }else if(!msgValue.match(msgRegex)){
+            $("#contactMessage1").show()
+            $("#contactMessage1").text("Invalid Message")
         }else{
             $("#contactMessage1").hide()
             checker+=1
@@ -81,38 +88,8 @@ function validater(){
 }
 
 
-
-
-
-
-
-
-// let checkName=false;
-// let checkMail=false;
-// let checkNumber=false;
-// let checkMessage=false;
-
-
-// function nameChecker(){
-//     var nameValue = $("#contactName").val()
-//     var nameRegex = /^[a-zA-Z]+(\s?[a-zA-Z]+)*$/;
-
-//     if(nameValue==""){
-//         $("#contactName").show()
-//         $("#contactName").html("Name is mandatory")
-//     }else if(nameValue.length<3||nameValue.length>20){
-//         $("#contactName").show()
-//         $("#contactName").html("Please enter a valid Name")
-//     }else if(nameValue.match(nameRegex)){
-//         checkName=true
-//         $("#contactName").html("")
-//     }
-
-
-// }
-
-
 $("#contactForm").submit((e)=>{
+
   e.preventDefault()
   $.ajax({
       url:"https://script.google.com/macros/s/AKfycbyP0b-H7u8u6l1fkLhpbNTMPmEQCbWKitl8acz5xMSd6doRxAhoRcPoRMHTP60vWhny/exec",
